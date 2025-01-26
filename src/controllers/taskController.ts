@@ -3,8 +3,8 @@ import { Request, Response } from 'express';
 
 export const createTasks = async (req: Request, res: Response) => {
     try {
-        const { title, description } = req.body;
-        const newTask = new Task({ title, description, status: 'pending' });
+        const { _id,title, description } = req.body;
+        const newTask = new Task({_id, title, description, status: 'pending' });
         await newTask.save();
         res.status(201).json({ message: 'Task created successfully' });
     }

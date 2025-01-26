@@ -36,6 +36,10 @@ export const login = async (req: Request, res: Response) => {
             res.status(403).json({ message: 'User does not exist',token:null,email:null,name:null });
             return
         }
+        if (!user.password) {
+            res.status(403).json({ message: 'Invalid credentials' });
+            return;
+        }
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             res.status(403).json({ message: 'Invalid credentials' });
@@ -85,7 +89,7 @@ export const verifyOtp = async (req: Request, res: Response) => {
         const { otp, email } = req.body;
         const user = await User.findOne({ email })
        const hotp = crypto.createHash('sha256').update(otp.toString()).digest('hex');
-        if (user.otp.toString() === hotp) {
+        if (user && user.otp && user.otp.toString() === hotp) {
             user.otp = '';
             await user.save();
             res.status(200).json({ message: 'OTP verified successfully', email });

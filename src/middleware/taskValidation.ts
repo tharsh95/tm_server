@@ -1,6 +1,7 @@
+import { NextFunction, Request, Response } from "express";
 import Joi from "joi";
 
-export const taskValidation = (req, res, next) => {
+export const taskValidation = (req:Request, res:Response, next:NextFunction) => {
     const schema = Joi.object({
         title: Joi.string().min(3).max(100).required(),
         description: Joi.string().required(),

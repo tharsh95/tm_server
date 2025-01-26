@@ -12,11 +12,6 @@ dotenv.config();
 
 app.use(express.json());
 app.use(cors());
-// Error-handling middleware function
-app.use((err, req, res,_) => {
-  console.error(err.stack); // Log the error stack trace for debugging
-  res.status(500).json({ error: 'An internal server error occurred.' });
-});
 
 app.use('/api/v1',router)    
 
