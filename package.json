@@ -5,12 +5,12 @@
   "engines": {
     "node": "22.x"
   },
-  "scripts": {
-    "start": "tsc && nodemon dist/app.js",
-    "lint": "eslint . --ext .ts",
-    "build": "tsc"
-
-  },
+"scripts": {
+  "start": "node dist/app.js",
+  "dev": "tsc && nodemon dist/app.js",
+  "build": "tsc",
+  "lint": "eslint . --ext .ts"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
