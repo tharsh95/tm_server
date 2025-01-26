@@ -9,8 +9,10 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "/"
+        "dest": "dist/app.js"
       }
-    ]
+    ],
+    "buildCommand": "npm run build",
+    "outputDirectory": "dist"
   }
   
