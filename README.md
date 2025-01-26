@@ -27,8 +27,8 @@ This project is a Node.js backend application built with TypeScript. It provides
 ### Local Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<your-username>/task-manager-backend.git
-   cd task-manager-backend
+   git clone https://github.com/tharsh95/tm_server.git
+   cd tm_server
    ```
 
 2. Install dependencies:
