@@ -3,10 +3,10 @@
     "target": "es2016",
     "module": "commonjs",
     "esModuleInterop": true,
-    // "strict": true,
+    "rootDir": "./src",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "dist"
+    "outDir": "./dist"
   },
   "include": ["src/**/*", "dist/app.js"],
   "exclude": ["node_modules", "dist"]
