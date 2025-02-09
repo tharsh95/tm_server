@@ -1,13 +1,13 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "dist/app.js",
+  "main": "build/index.js",
   "engines": {
     "node": "22.x"
   },
   "scripts": {
-    "start": "node dist/app.js",
-    "dev": "tsc && nodemon dist/app.js",
+    "start": "node build/index.js",
+    "dev": "tsc && nodemon build/index.js",
     "build": "tsc",
     "lint": "eslint . --ext .ts"
   },

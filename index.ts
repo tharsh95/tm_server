@@ -1,8 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import { connectDB } from './models/db';
-import router from './router';
+import { connectDB } from './src/models/db';
+import router from './src/router';
 
 
 const port = 3000;
@@ -12,7 +12,9 @@ dotenv.config();
 
 app.use(express.json());
 app.use(cors());
-
+app.get('/',(req,res)=>{
+  res.json({message:"Api running"})
+})
 app.use('/api/v1',router)    
 
 
