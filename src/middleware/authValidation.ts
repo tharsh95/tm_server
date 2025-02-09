@@ -8,21 +8,63 @@ export const registerValidation = (req:Request,res:Response,next:NextFunction)=>
     })
     const {error}=schema.validate(req.body);
     if(error){
-        return res.status(400).send(error.details[0].message);
+         res.status(400).send(error.details[0].message);
+         return
     }
     next();
-    return null
 }
 
-export const loginValidation = (req:Request,res:Response,next:NextFunction) => {
-    const schema=Joi.object({
-        email: Joi.string().required().email(),
-        password: Joi.string().required()
-    })
-    const {error}=schema.validate(req.body);
-    if(error){
-        return res.status(400).send(error.details[0].message);
+export const loginValidation = (req: Request, res: Response, next: NextFunction): void => {
+    const schema = Joi.object({
+      email: Joi.string().required().email(),
+      password: Joi.string().required(),
+    });
+  
+    const { error } = schema.validate(req.body);
+  
+    if (error) {
+      // Respond with a 400 status if validation fails
+      res.status(400).send(error.details[0].message);
+      return; // Ensure the function exits after sending the response
     }
+  
+    // Pass control to the next middleware/route handler
     next();
-    return null
-}
+  };
+export const emailValidation = (req: Request, res: Response, next: NextFunction): void => {
+    const schema = Joi.object({
+      email: Joi.string().required().email(),
+    });
+  
+    const { error } = schema.validate(req.body);
+  
+    if (error) {
+      // Respond with a 400 status if validation fails
+      res.status(400).send(error.details[0].message);
+      return; // Ensure the function exits after sending the response
+    }
+  
+    // Pass control to the next middleware/route handler
+    next();
+  };
+
+  export const otpValidation = (req: Request, res: Response, next: NextFunction): void => {
+    const schema = Joi.object({
+        email: Joi.string().required().email(),
+      otp: Joi.string()
+        .length(4) // Ensure the OTP is exactly 4 characters
+        .pattern(/^\d{4}$/) // Ensure the OTP is numeric
+        .required(), // Make it required
+    });
+  
+    const { error } = schema.validate(req.body);
+  
+    if (error) {
+      // Respond with a 400 status if validation fails
+      res.status(400).send(error.details[0].message);
+      return; // Ensure the function exits after sending the response
+    }
+  
+    // Pass control to the next middleware/route handler
+    next();
+  };

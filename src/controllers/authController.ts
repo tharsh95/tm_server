@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
-import { mail } from "../services/mail";
+import { sendOtpEmail } from "../services/mail";
 
 
 export const register = async (req: Request, res: Response) => {
@@ -71,7 +71,7 @@ export const sendMail = async (req: Request, res: Response) => {
         const hashedOtp = crypto.createHash('sha256').update(otp.toString()).digest('hex');
         user.otp = hashedOtp;
         await user.save();
-        mail(email,"Otp Sent for password reset",otp.toString())
+        sendOtpEmail(email,otp.toString())
 
         res.status(200).json({ message: 'Mail sent successfully', email });
     }
@@ -95,7 +95,6 @@ export const verifyOtp = async (req: Request, res: Response) => {
             res.status(200).json({ message: 'OTP verified successfully', email });
         }
         else {
-            console.log("Not Match")
             res.status(400).json({ message: 'Invalid OTP' });
         }
     }
