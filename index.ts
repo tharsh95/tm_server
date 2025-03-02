@@ -5,7 +5,7 @@ import { connectDB } from './src/models/db';
 import router from './src/router';
 
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 const app = express();
 
 dotenv.config();
@@ -17,8 +17,11 @@ app.get('/',(req,res)=>{
 })
 app.use('/api/v1',router)    
 
-
-app.listen(port, () => {
-  connectDB()
-  return console.log(`Express is listening at http://localhost:${port}`);
+connectDB().then(() => {
+  app.listen(port, () => {
+    console.log(`Express is listening at http://localhost:${port}`);
+  });
+}).catch(err => {
+  console.error('Failed to connect to database:', err);
+  process.exit(1);
 });
